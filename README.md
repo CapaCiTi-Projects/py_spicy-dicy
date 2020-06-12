@@ -9,7 +9,10 @@ The project is built to meet the following criteria:
 ![Dice Image](https://wallpaperlayer.com/img/2016/9/white-dice-widescreen-wallpaper-9242-9578-hd-wallpapers.jpg)
 
 ## Requirements
-This program has no requirements other than Python 3 and a need to simulate a dice roll.
+The following are required to run this program:
+* Python3
+* Python modules: re, random, sys & time
+* A need to simulate a dice roll
 
 ## Usage
 ### For standalone / testing purposes
