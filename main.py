@@ -1,6 +1,16 @@
 import random
 import re
+import sys
 import time
+
+__consts__ = {
+	"name": "Spicy Dicy",
+	"version": "0.9.0b",
+	"author": "Jesse Boise",
+	"year": "2020",
+	"copyright": "Copyright \u00a9 {} {}"
+}
+__consts__['copyright'] = __consts__['copyright'].format(__consts__['author'], __consts__['year'])
 
 class Die:
 	"""Class that represents a single die."""
@@ -71,39 +81,74 @@ def merge_dice_text(dice):
 
 	return out
 
+def print_animated(out, delay):
+	for line in out:
+		for c in line:
+			sys.stdout.write(c)
+			sys.stdout.flush()
+
+			time.sleep(delay)
+	print('')
+
 def get_first_int(val, default):
 	"""Function to see if the supplied val is an integer or starts with an integer, if so return that integer, otherwise return default."""
 	match = re.search("^\d+", val)
 	return int(match.group()) if match is not None else default
 
+def get_yes_no_bool(val, default=False):
+	val = val.lower()
+	if val.startswith('yes') or val == 'y':
+		return True
+	elif val.startswith('no') or val == 'n':
+		return False
+	else:
+		return default
+
 if __name__ == '__main__':
-	# Only run the following code if it is this file that is being executed.
-	dice = []
+	# Only run the following code if this isn't being run as a module.
+	intro_image = (
+		r"     ____             " + "\n" +
+		r"    /\' .\    _____   " + "\n" +
+		r"   /: \___\  / .  /\  " + "\n" +
+		r"   \' / . / /____/..\ " + f"    {__consts__['name']} {__consts__['version']}\n" +
+		r"    \/___/  \'  '\  / " + f"    {__consts__['copyright']}\n" +
+		r"             \'__'\/  " + "\n"
+	)
 
-	# Get the number of dice that the user would like to roll, from and input and then use `get_first_int()` to convert it.
-	num_dice = input('How many dice would you like to roll (default 1)? ')
-	num_dice = get_first_int(num_dice, 1)
+	print_animated(intro_image, .02)
 
-	# Get the number of faces on each die, at the moment the max is 9, because that is the highest that draw_text() can account for.
-	num_faces = input('How many faces do the dice have (default 6, max 9), starting from 1? ')
-	num_faces = get_first_int(num_faces, 6)
-	print('')
+	running = True
+	while running:
+		dice = []
 
-	if num_faces <= 0 or num_faces > 9:
-		raise ValueError('You can\'t have 0 or less face sor more than 9 faces on each die. Goodbye.')
+		# Get the number of dice that the user would like to roll, from and input and then use `get_first_int()` to convert it.
+		num_dice = input('How many dice would you like to roll (default 1)? ')
+		num_dice = get_first_int(num_dice, 1)
 
-	for i in range(num_dice):
-		dice.append(Die(num_faces))
+		# Get the number of faces on each die, at the moment the max is 9, because that is the highest that draw_text() can account for.
+		num_faces = input('How many faces do the dice have (default 6, max 9), starting from 1? ')
+		num_faces = get_first_int(num_faces, 6)
+		print('')
 
-	# Add simple processing / loading animation.
-	anim = list('|/-\\') # animation states
-	anim_count = 35 # iterations
-	anim_dur = 0 # seconds
+		if num_faces <= 0 or num_faces > 9:
+			raise ValueError('You can\'t have 0 or less face sor more than 9 faces on each die. Goodbye.')
 
-	for i in range(anim_count):
-		print(f'[{anim[i % len(anim)]}]  Loading dice...', end='\r')
-		time.sleep(anim_dur / anim_count)
+		for i in range(num_dice):
+			dice.append(Die(num_faces))
 
-	print('' * 20, end='\r')
-	print('Loading successful  :)')
-	print(merge_dice_text(dice))
+		# Add simple processing / loading animation.
+		anim = list('|/-\\') # animation states
+		anim_count = 35 # iterations
+		anim_dur = 2 # seconds
+
+		for i in range(anim_count):
+			print(f'[{anim[i % len(anim)]}]  Loading dice...', end='\r')
+			time.sleep(anim_dur / anim_count)
+
+		print(' ' * 20, end='\r')
+		print_animated(merge_dice_text(dice), .03)
+
+		running = get_yes_no_bool(input('Run the program again [Yes|no]? '))
+		if not running:
+			print('Not? Ok, then Goodbye and have a great day further. :)')
+
