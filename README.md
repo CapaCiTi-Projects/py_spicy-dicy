@@ -1,17 +1,15 @@
 # Python Sprint - DNA Sequence
-#### Jesse Boise - 4/05/2020
+#### Jesse Boise - 11/05/2020
 
-This program can be used to perform two functions, namely:
-* Transform a codon sequence into it's Amino Acid SLC equivalent.
-* Read the file 'DNA.txt' and mutate its contents into two other files:
-  * a file called 'normalDNA.txt' that has all of its 'a' chars converted to 'A'.
-  * a file called 'mutatedDNA.txt' that has all of its 'a' chars converted to 'T'.
-* Take the files outputed from mutate ('normalDNA.txt' & 'mutatedDNA.txt') and run transform on them to retrieve their Amino Acid SLCs.
+The goal of this project is to create a program that simulates a die roll.
+The project is built to meet the following criteria:
+1. Once the program has begun running, it will randomly select a number between a certain range - default is 6, inclusive.
+2. The program will then output the determined value and ask the user if he or she would like to roll again. 
+
+![Dice Image](https://wallpaperlayer.com/img/2016/9/white-dice-widescreen-wallpaper-9242-9578-hd-wallpapers.jpg)
 
 ## Requirements
-This program has no requirements other than Python 3 and knowledge of DNA.
-
-Before running, a text file named 'DNA.txt' is required to perform the mutate function
+This program has no requirements other than Python 3 and a need to simulate a dice roll.
 
 ## Usage
 ### For standalone / testing purposes
