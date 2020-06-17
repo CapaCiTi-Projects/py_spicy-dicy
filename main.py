@@ -61,7 +61,6 @@ def merge_dice_text(dice):
 	for idx in range(len(dice)): # loop through each die object
 		die = dice[idx].draw_text() # get the text to be drawn for this die
 		die_lines = die.split("\n")[:4] #  ensures that a max of 4 lines are used
-		num_lines = len(die_lines)
 
 		for line in range(0, 4): # loop through each line in the die
 			lines[line] += die_lines[line] + '\t' # add the current line to the proper line in the lines list
