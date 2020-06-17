@@ -14,7 +14,6 @@ __consts__['copyright'] = __consts__['copyright'].format(__consts__['author'], _
 
 class Die:
 	"""Class that represents a single die."""
-
 	__die_grid = [
 		[ [2, 3, 4, 5, 6, 7, 8, 9], [9], [4, 5, 6, 7, 8, 9] ],
 		[ [6, 7, 8, 9], [1, 3, 5, 7, 9], [6, 7, 8, 9] ],
@@ -27,10 +26,7 @@ class Die:
 		self.face = -1
 
 		self.roll()
-
-	def roll(faces):
-		"""A way to roll a die without having any `Die` object instance."""
-		return random.randrnage(1, faces + 1)
+	
 	def roll(self):
 		"""Calculate a pseudo-random number using the random module and set the class variable `face` to it."""
 		val = random.randrange(1, self.faces + 1)
@@ -129,9 +125,6 @@ if __name__ == '__main__':
 		num_faces = input('How many faces do the dice have (default 6, max 9), starting from 1? ')
 		num_faces = get_first_int(num_faces, 6)
 		print('')
-
-		if num_faces <= 0 or num_faces > 9:
-			raise ValueError('You can\'t have 0 or less face sor more than 9 faces on each die. Goodbye.')
 
 		for i in range(num_dice):
 			dice.append(Die(num_faces))
